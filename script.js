@@ -115,7 +115,7 @@ async function predict() {
                 - Use prescribed inhalers or medications as directed.<br>
                 - Avoid known triggers and monitor your symptoms.<br>
                 <br>
-                This AI model only provides preliminary insight into tuberculosis and asthma but is not a substitute<br>
+                This AI model only provides preliminary insight into asthma but is not a substitute<br>
                 for professional medical diagnosis. Always consult a healthcare provider for accurate evaluation<br>
                 and diagnosis.
             </p>`
@@ -141,7 +141,7 @@ async function predict() {
                 - If diagnosed, follow the full course of treatment to prevent drug-resistant TB.<br>
                 - Practice good hygiene, such as covering your mouth when coughing.<br>
                 <br>
-                This AI model only provides preliminary insight into tuberculosis and asthma but is not a substitute<br>
+                This AI model only provides preliminary insight into tuberculosis but is not a substitute<br>
                 for professional medical diagnosis. Always consult a healthcare provider for accurate evaluation<br>
                 and diagnosis.
             </p>`
