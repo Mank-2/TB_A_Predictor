@@ -3,32 +3,32 @@
 <head>
     <title>Health Condition Predictor</title>
     <script src="https://cdn.jsdelivr.net/pyodide/v0.27.4/full/pyodide.js"></script>
-    <link rel="stylesheet" href="style.css">
     <body>
         <div id="loading">
             <div>
                 <img src="cd-rom.gif" id="stylishgif">&nbsp;&nbsp;<p id="loadingtext">Loading...</p>
             </div>
         </div>
-
-        <div>
-            <h2>Health Condition Predictor</h2>
-
-            <label>Age: <input type="number" id="age"></label><br>
-            <label><input class="cb" type="checkbox" id="cough">Cough</label><br>
-            <label><input class="cb" type="checkbox" id="fever">Fever</label><br>
-            <label><input class="cb" type="checkbox" id="shortness_of_breath">Shortness of Breath</label><br>
-            <label><input class="cb" type="checkbox" id="wheezing">Wheezing</label><br>
-            <label><input class="cb" type="checkbox" id="weight_loss">Weight Loss</label><br>
-            <label><input class="cb" type="checkbox" id="chest_pain">Chest Pain</label><br>
-            <label><input class="cb" type="checkbox" id="fatigue">Fatigue</label><br>
-            <label><input class="cb" type="checkbox" id="sore_throat">Sore Throat</label><br>
-            <label><input class="cb" type="checkbox" id="night_sweats">Night Sweats</label><br>
-            <label><input class="cb" type="checkbox" id="loss_of_appetite">Loss of Appetite</label><br>
-
-            <button onclick="predict()">Predict</button>
-
-            <h3 id="result"></h3>
+        <div id="main-container">
+            <div id="main">
+                <div id="header">
+                    <h2 id="headertext">Health Condition Predictor</h2>
+                </div>
+    
+                <label>Age: <input type="number" id="age" min="1" placeholder="Enter your age."></label><br>
+                <label><input class="cb" type="checkbox" id="cough"> Cough</label><br>
+                <label><input class="cb" type="checkbox" id="fever"> Fever</label><br>
+                <label><input class="cb" type="checkbox" id="shortness_of_breath"> Shortness of Breath</label><br>
+                <label><input class="cb" type="checkbox" id="wheezing"> Wheezing</label><br>
+                <label><input class="cb" type="checkbox" id="weight_loss"> Weight Loss</label><br>
+                <label><input class="cb" type="checkbox" id="chest_pain"> Chest Pain</label><br>
+                <label><input class="cb" type="checkbox" id="fatigue"> Fatigue</label><br>
+                <label><input class="cb" type="checkbox" id="sore_throat"> Sore Throat</label><br>
+                <label><input class="cb" type="checkbox" id="night_sweats"> Night Sweats</label><br>
+                <label><input class="cb" type="checkbox" id="loss_of_appetite"> Loss of Appetite</label><br>
+    
+                <button onclick="predict()">Predict</button>
+            </div>
         </div>
 
         <div id="modalbox" class="modal">
@@ -39,5 +39,6 @@
         </div>          
     </body>
     <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 </html>

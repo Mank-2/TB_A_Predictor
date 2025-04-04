@@ -6,10 +6,117 @@
     font-style: normal;
 }
 
-body {
+@font-face {
+    font-family: 'GaretBook';
+    src: url('Garet-Book.ttf') format('woff2'),
+        url('Garet-Book.ttf') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GaretHeavy';
+    src: url('Garet-Heavy.ttf') format('woff2'),
+        url('Garet-Heavy.ttf') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background-image: url(the.png);
+}
+
+#main-container {
     display: flex;
     justify-content: center;
-    background-image: url(the.png);
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(240, 238, 235);
+    padding: 0px 2% 2% 2%; /* Adjust padding to be relative to the window size */
+    min-height: min-content; /* Ensure a minimum height */
+    height: auto; /* Allow dynamic resizing */
+    width: 90%; /* Allow for width to scale with the window */
+    max-width: 500px; /* Set a max width for large screens */
+    gap: 10px;
+    border-radius: 30px;
+    box-sizing: border-box; /* Prevent overflow */
+    box-shadow: 5px 5px 10px #888888;
+    overflow: hidden;
+}
+
+#header {
+    background-color: #5093b5;
+    width: 150%;
+    margin-bottom: 10px;
+    overflow-wrap: break-word; /* Allows the text to wrap */
+    word-wrap: break-word; /* Older syntax for compatibility */  
+}
+
+#headertext {
+    font-family: 'GaretHeavy';
+    font-size: 1.5rem;; /* Scalable font size */
+    text-align: center;
+    letter-spacing: 0.2px;
+    font-weight: 10;
+    color: white;
+}
+
+#main > label {
+    font-family: 'GaretBook';
+    width: 100%;
+    font-size: 1rem; /* Scalable font size */
+    text-align: left;
+}
+
+#main > button {
+    background-color: #5093b5;
+    font-family: 'GaretHeavy';
+    border: none;
+    color: white;
+    padding: 1rem 3rem; /* Scalable padding */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem; /* Scalable font size */
+    border-radius: 10px;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Add media queries for mobile responsiveness */
+@media (max-width: 768px) {
+
+    #header {
+        width: 105%;
+    }
+
+    #main > label {
+        font-size: 1rem;
+    }
+
+    #main > button {
+        margin-bottom: 15px;
+    }
+
+    #headertext {
+        font-size: 1.3rem;; /* Scalable font size */
+    }
+    
+}
+
+#main > button:hover {
+    padding: 1.5rem 3.5rem;
+    cursor: pointer;
+    background-color: #78b3d1;
 }
 
 #loading {
@@ -23,9 +130,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgb(0, 0, 0);
-    font-family: 'FranklinGotItcTEEMed';
+    color: rgb(255, 255, 255);
+    font-family: 'GaretHeavy';
 }
+
+
 
 #loading > div {
     display: flex;
@@ -34,42 +143,64 @@ body {
     height: auto;
     width: 30vi;
     text-align: center;
-    font-size: clamp(40px, 5vi, 75px);
-    
+    font-size: clamp(40px, 5vi, 75px);    
+    text-shadow: 5px 5px 10px #888888;
 }
 
 #loading > div > img {
-    width: clamp(40px, 5vi, 75px); 
-    height: clamp(40px, 5vi, 75px);
+    width: clamp(40px, 5vi, 90px); 
+    height: clamp(40px, 5vi, 90px);
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.602));
 }
+
 
 .modal {
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 100px;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
 }
 
 .modal-content {
+    position: relative;
+    background-color: white;
+    padding: 5% 5%; /* Adjust padding to be relative to the window size */
+    min-height: min-content; /* Ensure a minimum height */
+    height: auto; /* Allow dynamic resizing */
+    width: 90%; /* Allow for width to scale with the window */
+    max-width: 500px; /* Set a max width for large screens */
+    gap: 10px;
+    border-radius: 20px;
+    padding: 20px;
+/* 
+    border-radius: 20px;
+    position: fixed;
     background-color: #fefefe;
-    margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    max-width: 500px;
+*/
+}
+
+#remove {
+    font-family: 'GaretBook';
 }
 
 .close {
     color: #aaaaaa;
-    float: right;
-    font-size: 28px;
+    position: absolute; /* Positioning it relative to the modal-content */
+    top: 10px; /* Adjust the distance from the top */
+    right: 20px; /* Adjust the distance from the right */
+    font-size: 2rem; /* Scalable font size */
     font-weight: bold;
+    cursor: pointer; /* Add pointer cursor to indicate it's clickable */
 }
 
 .close:hover,
@@ -78,6 +209,19 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+
+/* Media queries for mobile responsiveness */
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 10% 5%; /* Adjust padding for smaller screens */
+        width: 95%; /* Use more of the screen on mobile */
+    }
+
+    .close {
+        font-size: 1.5rem; /* Adjust close button size on mobile */
+    }
+}
+
 
 pre {
     white-space: pre-wrap;     

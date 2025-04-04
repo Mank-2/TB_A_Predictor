@@ -1,16 +1,26 @@
 // Initialize modal identifiers.
 var modal = document.getElementById("modalbox");
 var span = document.getElementsByClassName("close")[0];
+var resultKeys = new Map([
+    ['tb', 'Tuberculosis'],
+    ['asthma', 'Asthma'],
+    ['no_disease', 'No disease'],
+ ]);
+
 
 async function loadPyodideAndPackages() {
     // Show loading screen.
     document.getElementById("loading").style.display = "flex";
 
+    while (typeof loadPyodide === "undefined") {
+        await new Promise(resolve => setTimeout(resolve, 100));
+    }
+
     window.pyodide = await loadPyodide();
+    
+    let packages = pyodide.loadPackage(["pandas", "scikit-learn"]);
 
-    await pyodide.loadPackage(["pandas", "scikit-learn"]);
-
-    document.getElementById("loadingtext").innerText = `Finished!`;
+    await packages;
 
     // Run Python code.
     await pyodide.runPythonAsync(`
@@ -39,7 +49,7 @@ async function loadPyodideAndPackages() {
         X = df.drop('diagnosis', axis=1)
         y = df['diagnosis']
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-        model = RandomForestClassifier()
+        model = RandomForestClassifier(n_estimators=50)
         model.fit(X_train, y_train)
         feature_names = X.columns.tolist()
 
@@ -70,15 +80,25 @@ async function predict() {
         'loss_of_appetite': document.getElementById('loss_of_appetite').checked ? 1 : 0,
     };
 
+    if (isNaN(user_data.age) || user_data.age < 0 || user_data.age > 120) {
+        modal.style.display = "flex";
+        
+        document.getElementById('modaltext').insertAdjacentHTML('afterend', '<p id="remove">Please enter a valid age between 0 and 120.<p id="remove">')
+
+        message = document.getElementById("remove")
+
+        return "User did not set age."
+    };
+
     let prediction = await pyodide.runPythonAsync(`predict_health_condition(${JSON.stringify(user_data)})`);
 
-    modal.style.display = "block";
-
-    document.getElementById('modaltext').innerText = `Predicted Condition: ${prediction}`;
+    modal.style.display = "flex";
 
     if (prediction == "asthma") {
         document.getElementById('modaltext').insertAdjacentHTML('afterend', 
             `<p id="remove">
+                Predicted Condition: ${resultKeys.get(prediction)}.<br>
+                <br>
                 Looks like you might have asthma.<br>
                 <br>
                 What is Asthma?<br>
@@ -99,6 +119,8 @@ async function predict() {
     } else if (prediction == "tb") {
         document.getElementById('modaltext').insertAdjacentHTML('afterend', 
             `<p id="remove">
+                Predicted Condition: ${resultKeys.get(prediction)}.<br>
+                <br>
                 Looks like you might have tuberculosis (TB).<br>
                 <br>
                 What is Tuberculosis (TB)?<br>
@@ -119,6 +141,8 @@ async function predict() {
     } else {
         document.getElementById('modaltext').insertAdjacentHTML('afterend', 
             `<p id="remove">
+                Predicted Condition: ${resultKeys.get(prediction)}.<br>
+                <br>
                 Looks like you do not have asthma or tuberculosis.<br>
                 <br>
                 What Could It Be?<br>
@@ -133,7 +157,6 @@ async function predict() {
         );
     }
 
-    // Empty out modal box.
     message = document.getElementById("remove")
 }
 
@@ -153,6 +176,7 @@ function resetAllInputs() {
 // Modal event listeners.
 span.onclick = function() {
     modal.style.display = "none";
+    // Empty out modal box.
     message.remove();
     resetAllInputs();
 }
@@ -160,6 +184,7 @@ span.onclick = function() {
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
+        // Empty out modal box.
         message.remove();
         resetAllInputs();
     }
