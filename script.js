@@ -113,7 +113,11 @@ async function predict() {
                 What You Should Do:<br>
                 - Consult a healthcare professional for a detailed diagnosis.<br>
                 - Use prescribed inhalers or medications as directed.<br>
-                - Avoid known triggers and monitor your symptoms.
+                - Avoid known triggers and monitor your symptoms.<br>
+                <br>
+                This AI model only provides preliminary insight into tuberculosis and asthma but is not a substitute<br>
+                for professional medical diagnosis. Always consult a healthcare provider for accurate evaluation<br>
+                and diagnosis.
             </p>`
         );
     } else if (prediction == "tb") {
@@ -135,7 +139,11 @@ async function predict() {
                 What You Should Do:<br>
                 - Visit a healthcare provider immediately for a TB test (e.g., sputum test or chest X-ray).<br>
                 - If diagnosed, follow the full course of treatment to prevent drug-resistant TB.<br>
-                - Practice good hygiene, such as covering your mouth when coughing.
+                - Practice good hygiene, such as covering your mouth when coughing.<br>
+                <br>
+                This AI model only provides preliminary insight into tuberculosis and asthma but is not a substitute<br>
+                for professional medical diagnosis. Always consult a healthcare provider for accurate evaluation<br>
+                and diagnosis.
             </p>`
         );
     } else {
@@ -152,7 +160,11 @@ async function predict() {
                 What You Should Do:<br>
                 - Monitor your symptoms and rest.<br>
                 - If symptoms persist or worsen, consult a healthcare professional.<br>
-                - Stay hydrated and avoid irritants like smoke or pollution.
+                - Stay hydrated and avoid irritants like smoke or pollution.<br>
+                <br>
+                This AI model only provides preliminary insight into tuberculosis and asthma but is not a substitute<br>
+                for professional medical diagnosis. Always consult a healthcare provider for accurate evaluation<br>
+                and diagnosis.
             </p>`
         );
     }
