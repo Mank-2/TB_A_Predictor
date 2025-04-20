@@ -67,6 +67,7 @@ async function loadPyodideAndPackages() {
 }
 
 async function predict() {
+    document.getElementById("remove").remove();
     let user_data = {
         'age': parseInt(document.getElementById('age').value),
         'cough': document.getElementById('cough').checked ? 1 : 0,
