@@ -10,6 +10,7 @@ var resultKeys = new Map([
 
 
 async function loadPyodideAndPackages() {
+    document.getElementById("text-container").innerHTML = "";
     // Show loading screen.
     document.getElementById("loading").style.display = "flex";
 
@@ -67,7 +68,7 @@ async function loadPyodideAndPackages() {
 }
 
 async function predict() {
-    document.getElementById("remove").remove();
+    document.getElementById("text-container").innerHTML = "";
     let user_data = {
         'age': parseInt(document.getElementById('age').value),
         'cough': document.getElementById('cough').checked ? 1 : 0,
@@ -85,9 +86,7 @@ async function predict() {
     if (isNaN(user_data.age) || user_data.age < 0 || user_data.age > 120) {
         modal.style.display = "flex";
         
-        document.getElementById('modal-content').insertAdjacentHTML('beforeend', '<p id="remove">Please enter a valid age between 0 and 120.<p id="remove">')
-
-        message = document.getElementById("remove")
+        document.getElementById('text-container').insertAdjacentHTML('beforeend', '<p id="remove">Please enter a valid age between 0 and 120.<p id="remove">')
 
         return "User did not set age."
     };
@@ -101,7 +100,7 @@ async function predict() {
     modal.style.display = "flex";
 
     if (prediction == "asthma") {
-        document.getElementById('modal-content').insertAdjacentHTML('beforeend', 
+        document.getElementById('text-container').insertAdjacentHTML('beforeend', 
             `<div id="remove">
                 Predicted Condition: <b>${resultKeys.get(prediction)}</b>.<br>
                 <br>
@@ -126,7 +125,7 @@ async function predict() {
             </div>`
         );
     } else if (prediction == "tb") {
-        document.getElementById('modal-content').insertAdjacentHTML('beforeend', 
+        document.getElementById('text-container').insertAdjacentHTML('beforeend', 
             `<div id="remove">
                 Predicted Condition: <b>${resultKeys.get(prediction)}</b>.<br>
                 <br>
@@ -151,7 +150,7 @@ async function predict() {
             </div>`
         );
     } else {
-        document.getElementById('modal-content').insertAdjacentHTML('beforeend', 
+        document.getElementById('text-container').insertAdjacentHTML('beforeend', 
             `<div id="remove">
                 Predicted Condition: <b>${resultKeys.get(prediction)}</b>.<br>
                 <br>
@@ -190,7 +189,7 @@ function resetAllInputs() {
 span.onclick = function() {
     modal.style.display = "none";
     // Empty out modal box.
-    document.getElementById("remove").remove();
+    document.getElementById("text-container").innerHTML = "";
     resetAllInputs();
 }
 
@@ -198,7 +197,7 @@ window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
         // Empty out modal box.
-        document.getElementById("remove").remove();
+        document.getElementById("text-container").innerHTML = "";
         resetAllInputs();
     }
 }
