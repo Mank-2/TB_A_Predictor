@@ -1,6 +1,7 @@
 // Initialize modal identifiers.
 var modal = document.getElementById("modalbox");
 var span = document.getElementsByClassName("close")[0];
+let loadingItem = document.getElementById("loading2");
 var resultKeys = new Map([
     ['tb', 'Tuberculosis'],
     ['asthma', 'Asthma'],
@@ -83,93 +84,92 @@ async function predict() {
     if (isNaN(user_data.age) || user_data.age < 0 || user_data.age > 120) {
         modal.style.display = "flex";
         
-        document.getElementById('modaltext').insertAdjacentHTML('afterend', '<p id="remove">Please enter a valid age between 0 and 120.<p id="remove">')
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', '<p id="remove">Please enter a valid age between 0 and 120.<p id="remove">')
 
         message = document.getElementById("remove")
 
         return "User did not set age."
     };
 
+    loadingItem.style.display = "flex";
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    loadingItem.style.display = "none";
+
     let prediction = await pyodide.runPythonAsync(`predict_health_condition(${JSON.stringify(user_data)})`);
 
     modal.style.display = "flex";
 
     if (prediction == "asthma") {
-        document.getElementById('modaltext').insertAdjacentHTML('afterend', 
-            `<p id="remove">
-                Predicted Condition: ${resultKeys.get(prediction)}.<br>
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', 
+            `<div id="remove">
+                Predicted Condition: <b>${resultKeys.get(prediction)}</b>.<br>
                 <br>
-                Looks like you might have asthma.<br>
+                <b>Looks like you might have asthma.</b><br>
                 <br>
-                What is Asthma?<br>
-                Asthma is a chronic respiratory condition that causes inflammation and narrowing of the airways,<br>
-                leading to symptoms like wheezing, coughing, shortness of breath, and chest tightness.<br>
-                <br>
-                Key Facts:<br>
-                - Asthma affects over 260 million people worldwide (WHO, 2023).<br>
-                - Common triggers include allergens, pollution, cold air, and exercise.<br>
-                - Asthma is manageable with proper treatment, such as inhalers and avoiding triggers.<br>
-                <br>
-                What You Should Do:<br>
-                - Consult a healthcare professional for a detailed diagnosis.<br>
-                - Use prescribed inhalers or medications as directed.<br>
-                - Avoid known triggers and monitor your symptoms.<br>
-                <br>
-                This AI model only provides preliminary insight into asthma but is not a substitute<br>
-                for professional medical diagnosis. Always consult a healthcare provider for accurate evaluation<br>
-                and diagnosis.
-            </p>`
+                <b>What is Asthma?</b><br>
+                Asthma is a chronic respiratory condition that causes inflammation and narrowing of the airways, 
+                leading to symptoms like wheezing, coughing, shortness of breath, and chest tightness.
+                <br><br>
+                <b>Key Facts:</b><ul>
+                    <li>Asthma affects over 260 million people worldwide (WHO, 2023).</li>
+                    <li>Common triggers include allergens, pollution, cold air, and exercise.</li>
+                    <li>Asthma can be effectively managed with the right treatment, including inhalers and avoiding triggers.</li>
+                </ul>
+                <b>What You Should Do:</b><ul>
+                    <li>Consult a healthcare professional for a detailed diagnosis.</li>
+                    <li>Use prescribed inhalers or medications as directed.</li>
+                    <li>Avoid known triggers and monitor your symptoms.</li>
+                </ul>
+                <i>This AI model only provides preliminary insight into asthma and does not act as a substitute. 
+                Always consult a healthcare provider for accurate evaluation and diagnosis.</i>
+            </div>`
         );
     } else if (prediction == "tb") {
-        document.getElementById('modaltext').insertAdjacentHTML('afterend', 
-            `<p id="remove">
-                Predicted Condition: ${resultKeys.get(prediction)}.<br>
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', 
+            `<div id="remove">
+                Predicted Condition: <b>${resultKeys.get(prediction)}</b>.<br>
                 <br>
-                Looks like you might have tuberculosis (TB).<br>
+                <b>Looks like you might have tuberculosis.</b><br>
                 <br>
-                What is Tuberculosis (TB)?<br>
-                TB is an infectious disease caused by the bacterium Mycobacterium tuberculosis.<br>
-                It primarily affects the lungs but can also impact other parts of the body.<br>
+                <b>What is Tuberculosis (TB)?</b><br>
+                TB is an infectious disease caused by the bacterium Mycobacterium tuberculosis. 
+                 It primarily affects the lungs but can also impact other parts of the body.<br>
                 <br>
-                Key Facts:<br>
-                - TB is one of the top 10 causes of death worldwide (WHO, 2023).<br>
-                - Symptoms include persistent cough, fever, night sweats, and weight loss.<br>
-                - TB is curable with a 6-9 month course of antibiotics.<br>
-                <br>
-                What You Should Do:<br>
-                - Visit a healthcare provider immediately for a TB test (e.g., sputum test or chest X-ray).<br>
-                - If diagnosed, follow the full course of treatment to prevent drug-resistant TB.<br>
-                - Practice good hygiene, such as covering your mouth when coughing.<br>
-                <br>
-                This AI model only provides preliminary insight into tuberculosis but is not a substitute<br>
-                for professional medical diagnosis. Always consult a healthcare provider for accurate evaluation<br>
-                and diagnosis.
-            </p>`
+                <b>Key Facts:</b><ul>
+                    <li>Tuberculosis is one of the top 10 causes of death worldwide (WHO, 2023).</li>
+                    <li>Symptoms include persistent cough, fever, night sweats, and weight loss.</li>
+                    <li>Tuberculosis is curable in a six-to-nine-month course of antibiotics.</li>
+                </ul>
+                <b>What You Should Do:</b><ul>
+                    <li>Visit a healthcare provider immediately for a TB test (e.g., sputum test or chest X-ray).</li>
+                    <li>If diagnosed, follow the full course of treatment to prevent drug-resistant TB.</li>
+                    <li>Practice good hygiene, such as covering your mouth when coughing.</li>
+                </ul>
+                <i>This AI model only provides preliminary insight into tuberculosis and does not act as a substitute. 
+                Always consult a healthcare provider for accurate evaluation and diagnosis.</i>
+            </div>`
         );
     } else {
-        document.getElementById('modaltext').insertAdjacentHTML('afterend', 
-            `<p id="remove">
-                Predicted Condition: ${resultKeys.get(prediction)}.<br>
+        document.getElementById('modal-content').insertAdjacentHTML('beforeend', 
+            `<div id="remove">
+                Predicted Condition: <b>${resultKeys.get(prediction)}</b>.<br>
                 <br>
-                Looks like you do not have asthma or tuberculosis.<br>
+                <b>Looks like you do not have asthma or tuberculosis.</b><br>
                 <br>
-                What Could It Be?<br>
-                Your symptoms do not strongly indicate asthma or TB. However, you may be experiencing a mild respiratory infection, <br>
+                <b>What Could It Be?</b><br>
+                Your symptoms do not strongly indicate asthma or TB. However, you may be experiencing a mild respiratory infection,
                 allergies, or another condition.<br>
                 <br>
-                What You Should Do:<br>
-                - Monitor your symptoms and rest.<br>
-                - If symptoms persist or worsen, consult a healthcare professional.<br>
-                - Stay hydrated and avoid irritants like smoke or pollution.<br>
-                <br>
-                This AI model only provides preliminary insight into tuberculosis and asthma but is not a substitute<br>
-                for professional medical diagnosis. Always consult a healthcare provider for accurate evaluation<br>
-                and diagnosis.
-            </p>`
+                <b>What You Should Do:</b><ul>
+                    <li>Monitor your symptoms and rest.</li>
+                    <li>If symptoms persist or worsen, consult a healthcare professional.</li>
+                    <li>Stay hydrated and avoid irritants like smoke or pollution.</li>
+                </ul>
+                <i>This AI model only provides preliminary insight into asthma and tuberculosis and does not act as a substitute. 
+                Always consult a healthcare provider for accurate evaluation and diagnosis.</i>
+            </div>`
         );
     }
-
-    message = document.getElementById("remove")
 }
 
 loadPyodideAndPackages();
@@ -189,7 +189,7 @@ function resetAllInputs() {
 span.onclick = function() {
     modal.style.display = "none";
     // Empty out modal box.
-    message.remove();
+    document.getElementById("remove").remove();
     resetAllInputs();
 }
 
@@ -197,7 +197,7 @@ window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
         // Empty out modal box.
-        message.remove();
+        document.getElementById("remove").remove();
         resetAllInputs();
     }
 }

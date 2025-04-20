@@ -9,12 +9,17 @@
                 <img src="cd-rom.gif" id="stylishgif">&nbsp;&nbsp;<p id="loadingtext">Loading...</p>
             </div>
         </div>
+        <div id="loading2">
+            <div>
+                <img src="cd-rom.gif" id="stylishgif">&nbsp;&nbsp;<p id="loadingtext">Loading...</p>
+            </div>
+        </div>
         <div id="main-container">
             <div id="main">
                 <div id="header">
                     <h2 id="headertext">Health Condition Predictor</h2>
                 </div>
-    
+                <p id="instructions">Please enter your age and select all symptoms you have experienced in the past month.</p>
                 <label>Age: <input type="number" id="age" min="1" placeholder="Enter your age."></label><br>
                 <label><input class="cb" type="checkbox" id="cough"> Cough</label><br>
                 <label><input class="cb" type="checkbox" id="fever"> Fever</label><br>
@@ -32,9 +37,8 @@
         </div>
 
         <div id="modalbox" class="modal">
-            <div class="modal-content">
+            <div id="modal-content">
               <span class="close">&times;</span>
-              <p id="modaltext"></p>
             </div>
         </div>          
     </body>

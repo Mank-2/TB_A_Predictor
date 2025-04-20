@@ -62,7 +62,15 @@ html, body {
     color: white;
 }
 
+
 #main > label {
+    font-family: 'GaretBook';
+    width: 100%;
+    font-size: 1rem;
+    text-align: left;
+}
+
+#instructions{
     font-family: 'GaretBook';
     width: 100%;
     font-size: 1rem;
@@ -139,6 +147,41 @@ html, body {
     filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.602)) brightness(85%) saturate(110%);
 }
 
+#loading2 {
+    display: none;
+    position: fixed;
+    width: 60%;
+    min-width: 360px;
+    height: 20%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+    font-family: 'GaretHeavy';
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+    border-radius: 20px;
+}
+
+#loading2 > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 30vi;
+    text-align: center;
+    font-size: 50px;
+    text-shadow: 5px 5px 10px #888888;
+}
+
+#loading2 > div > img {
+    width: 50px;
+    height: 50px;
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.602)) brightness(85%) saturate(110%);
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -152,7 +195,7 @@ html, body {
     align-items: center;
 }
 
-.modal-content {
+#modal-content {
     position: relative;
     background-color: white;
     padding: 5% 5%;
@@ -167,6 +210,17 @@ html, body {
 
 #remove {
     font-family: 'GaretBook';
+    display: block;
+    margin: 1em 0;
+    line-height: 1.5;
+}
+
+ul, li, b, i {
+    font-family: 'GaretBook';
+}
+
+i {
+    color: #878787;
 }
 
 .close {
@@ -187,7 +241,7 @@ html, body {
 }
 
 @media (max-width: 768px) {
-    .modal-content {
+    #modal-content {
         padding: 10% 5%;
         width: 95%;
     }
